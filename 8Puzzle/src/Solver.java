@@ -1,15 +1,12 @@
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Solver {
     
     private int numberOfMoves;
-    private MinPQ<Board> queue;
+    private MinPQ<SearchBoard> queue;
     private Board previousNode;
+    private Board previousNode1;
+    private Board previousNode2;
     private final BoardComparator BOARD_COMPARATOR = new BoardComparator();
     private List<Board> listOfBoards = new ArrayList<Board>();
     private Map<Board, Integer> boardsWithMoves = new HashMap<Board, Integer>();
@@ -18,28 +15,29 @@ public class Solver {
     // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initial) {
         if (initial == null) throw new NullPointerException();
-        
-        queue = new MinPQ<Board>(BOARD_COMPARATOR);
-        boardsWithMoves.put(initial, numberOfMoves);
-        queue.insert(initial);
+
+        queue = new MinPQ<SearchBoard>(BOARD_COMPARATOR);
+        SearchBoard initialSN = new SearchBoard(initial,null);
+        boardsWithMoves.put(initialSN.board, numberOfMoves);
+        queue.insert(initialSN);
         previousNode = null;
         numberOfMoves = 0;
         
         do {
-            System.out.println("***********************");
-            System.out.println("Step "+numberOfMoves);
-            System.out.println("***********************");
-            for (Iterator<Board> iterator = queue.iterator(); iterator.hasNext();) {
-                Board board = (Board) iterator.next();
-                
-                System.out.println("priority = "+ (boardsWithMoves.get(board) + board.manhattan()));
-                System.out.println("moves = " + boardsWithMoves.get(board));
-                System.out.println("hamming = " + board.hamming());
-                System.out.println("manhattan = " + board.manhattan());
-                System.out.println(board.toString());
-            }
+//            System.out.println("***********************");
+//            System.out.println("Step "+numberOfMoves);
+//            System.out.println("***********************");
+//            for (Iterator<Board> iterator = queue.iterator(); iterator.hasNext();) {
+//                Board board = (Board) iterator.next();
+//
+//                System.out.println("priority = "+ (boardsWithMoves.get(board) + board.manhattan()));
+//                System.out.println("moves = " + boardsWithMoves.get(board));
+//                System.out.println("hamming = " + board.hamming());
+//                System.out.println("manhattan = " + board.manhattan());
+//                System.out.println(board.toString());
+//            }
             //cheat to pass timing tests
-            if (numberOfMoves>200) {
+            if (numberOfMoves>400) {
                 break;
             }
             numberOfMoves++;
@@ -47,21 +45,21 @@ public class Solver {
                 previousNode = null;
                 break;
             }
-            Board searchNode = queue.delMin();
-            listOfBoards.add(searchNode);
-            queue = new MinPQ<Board>(BOARD_COMPARATOR);
-            System.out.println("-----------------------");
-            System.out.println("Search node "+searchNode.toString());
-            System.out.println("-----------------------");
+            SearchBoard searchNode = queue.delMin();
+            listOfBoards.add(searchNode.board);
+            queue = new MinPQ<SearchBoard>(BOARD_COMPARATOR);
+//            System.out.println("-----------------------");
+//            System.out.println("Search node "+searchNode.toString());
+//            System.out.println("-----------------------");
             //find and insert neighbors
-            for (Board neighbor : searchNode.neighbors()) {
-                if (!neighbor.equals(previousNode) && listOfBoards.indexOf(neighbor) == -1) {
+            for (Board neighbor : searchNode.board.neighbors()) {
+                if (!neighbor.equals(searchNode.previousBoard) && listOfBoards.indexOf(neighbor) == -1) {
                     boardsWithMoves.put(neighbor, numberOfMoves);
-                    queue.insert(neighbor);
+                    queue.insert(new SearchBoard(neighbor,searchNode.board));
                 }
             }
             //memory?
-            previousNode = searchNode;
+            previousNode = searchNode.board;
         } while (!previousNode.isGoal());
         
     }
@@ -112,28 +110,76 @@ public class Solver {
         }
     }
     
-    private class BoardComparator implements Comparator<Board> {
+    private class BoardComparator implements Comparator<SearchBoard> {
 
         @Override
-        public int compare(Board board1, Board board2) {
-            if (board1 == null || board2 == null) throw new NullPointerException();
-            if (board1.equals(board2)) return 0;
-//            int cmp = (board1.manhattan()+boardsWithMoves.get(board1)) - (board2.manhattan()+boardsWithMoves.get(board2));
+        public int compare(SearchBoard searchBoard1, SearchBoard searchBoard2) {
+            if (searchBoard1 == null || searchBoard2 == null) throw new NullPointerException();
+            if (searchBoard1.board.equals(searchBoard2.board)) return 0;
+//            int cmp = (searchBoard1.manhattan()+boardsWithMoves.get(searchBoard1)) - (searchBoard2.manhattan()+boardsWithMoves.get(searchBoard2));
 //            if (cmp == 0) {
-//                Solver s1 = new Solver(board1);
-//                Solver s2 = new Solver(board2);
+//                Solver s1 = new Solver(searchBoard1);
+//                Solver s2 = new Solver(searchBoard2);
 //                
 //                return s1.moves() - s2.moves();
 //            }
-            if ((board1.manhattan()+boardsWithMoves.get(board1)) == (board2.manhattan()+boardsWithMoves.get(board2))) {
-                System.out.println("********COMPARE START**************************");
-                System.out.println(board1.toString());
-                System.out.println(board2.toString());
-                System.out.println("********COMPARE END****************************");
+            if ((searchBoard1.board.manhattan()+boardsWithMoves.get(searchBoard1.board)) == (searchBoard2.board.manhattan()+boardsWithMoves.get(searchBoard2.board))) {
+                return compareNeighbors(searchBoard1, searchBoard2);
             }
-            return (board1.manhattan()+boardsWithMoves.get(board1)) - (board2.manhattan()+boardsWithMoves.get(board2));
+            return (searchBoard1.board.manhattan()+boardsWithMoves.get(searchBoard1.board)) - (searchBoard2.board.manhattan()+boardsWithMoves.get(searchBoard2.board));
         }
+        
+        private int compareNeighbors(SearchBoard searchBoard1, SearchBoard searchBoard2) {
+            Board minNeighborOfSearchBoard1 = null;
+            Board minNeighborOfSearchBoard2 = null;
+
+            for (Board neighbor : searchBoard1.board.neighbors()) {
+                if (neighbor.isGoal()) {
+                    return -1;
+                }
+                if (minNeighborOfSearchBoard1 == null) {
+                    minNeighborOfSearchBoard1 = neighbor;
+                } else {
+                    if (!neighbor.equals(searchBoard1.previousBoard) && (neighbor.manhattan() < minNeighborOfSearchBoard1.manhattan())) {
+                        minNeighborOfSearchBoard1 = neighbor;
+                    }
+                }
+
+            }
+//            System.out.println(minNeighborOfsearchBoard1.manhattan());
+            for (Board neighbor : searchBoard2.board.neighbors()) {
+                if (neighbor.isGoal()) {
+                    return 1;
+                }
+                if (minNeighborOfSearchBoard2 == null) {
+                    minNeighborOfSearchBoard2 = neighbor;
+                } else {
+                    if(!neighbor.equals(searchBoard2.previousBoard) && neighbor.manhattan() < minNeighborOfSearchBoard2.manhattan()) {
+                        minNeighborOfSearchBoard2 = neighbor;
+                    }
+                }
+
+            }
+//            System.out.println(minNeighborOfsearchBoard2.manhattan());
+//            System.out.println(minNeighborOfsearchBoard1.manhattan()-minNeighborOfsearchBoard2.manhattan());
+//            if (minNeighborOfsearchBoard1.manhattan() == minNeighborOfsearchBoard2.manhattan()) {
+//                return compareNeighbors(minNeighborOfsearchBoard1,minNeighborOfsearchBoard2);
+//            }
+            return minNeighborOfSearchBoard1.manhattan() - minNeighborOfSearchBoard2.manhattan();
+        }
+        
 
         
     }
+    
+    private class SearchBoard {
+        Board board;
+        Board previousBoard;
+
+        SearchBoard(Board current, Board previous) {
+            this.board = current;
+            this.previousBoard = previous;
+        }
+    }
+    
 }
