@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -10,13 +11,33 @@ import java.util.TreeSet;
  */
 public class KdTree {
 
+    private final int VERTICAL = 1;
+    private final  int HORIZONTAL = 0;
+
     private Set<Node> setOfNodes = new TreeSet<Node>();
     private Node root;
+    private Node tempParent;
     private int levelIndex;
 
     // construct an empty kd-tree
     public KdTree() {
 
+    }
+
+    public static void main(String[] args) {
+        String filename = args[0];
+        In in = new In(filename);
+
+        // initialize the two data structures with point from standard input
+        KdTree kdtree = new KdTree();
+        while (!in.isEmpty()) {
+            double x = in.readDouble();
+            double y = in.readDouble();
+            Point2D p = new Point2D(x, y);
+            kdtree.insert(p);
+        }
+
+        kdtree.draw();
     }
 
     // is the tree empty?
@@ -36,8 +57,34 @@ public class KdTree {
     }
 
     private Node insertPoint(Node node, Point2D point) {
-        if (node == null) return new Node(point);
         double cmp;
+        if (node == null) {
+            Node rootNode = new Node(point);
+            if (tempParent == null) {
+                rootNode.rect = new RectHV(0,0,1,1);
+                rootNode.orientation = VERTICAL;
+            } else {
+                if (levelIndex % 2 == 1) {
+                    rootNode.orientation = HORIZONTAL;
+                    cmp = point.x() - (tempParent.p.x());
+                    if (cmp < 0 ) {
+                        rootNode.rect = new RectHV(tempParent.rect.xmin(),tempParent.rect.ymin(),tempParent.p.x(),tempParent.rect.ymax());
+                    } else {
+                        rootNode.rect = new RectHV(tempParent.p.x(),tempParent.rect.ymin(),tempParent.rect.xmax(),tempParent.rect.ymax());
+                    }
+                } else {
+                    rootNode.orientation = VERTICAL;
+                    cmp = point.y() - (tempParent.p.y());
+                    if (cmp < 0 ) {
+                        rootNode.rect = new RectHV(tempParent.rect.xmin(),tempParent.rect.ymin(),tempParent.rect.xmax(),tempParent.p.y());
+                    } else {
+                        rootNode.rect = new RectHV(tempParent.rect.xmin(),tempParent.p.y(),tempParent.rect.xmax(),tempParent.rect.ymax());
+                    }
+                }
+
+            }
+            return rootNode;
+        }
         if (levelIndex % 2 == 0) {
             cmp = point.x() - (node.p.x());
             levelIndex++;
@@ -46,8 +93,15 @@ public class KdTree {
             levelIndex++;
         }
 
-        if (cmp < 0) node.lb = insertPoint(node.lb, point);
-        else if (cmp >= 0) node.rt = insertPoint(node.rt, point);
+        if (cmp < 0) {
+            tempParent = node;
+            tempParent.rect = node.rect;
+            node.lb = insertPoint(node.lb, point);
+        } else if (cmp >= 0) {
+            tempParent = node;
+            tempParent.rect = node.rect;
+            node.rt = insertPoint(node.rt, point);
+        }
 
         return node;
     }
@@ -78,20 +132,41 @@ public class KdTree {
     // draw all of the points to standard draw
     public void draw() {
         Node current = root;
+        StdDraw.setPenColor(StdDraw.BLACK);
+        StdDraw.setPenRadius(.02);
         StdDraw.point(current.p.x(),current.p.y());
-        StdDraw.line(current.p.x(),0,current.p.x(),current.p.y());
-        drawLeftChild(current);
-        drawRightChild(current);
+        StdDraw.setPenColor(StdDraw.RED);
+        StdDraw.setPenRadius(.01);
+        StdDraw.line(current.p.x(),0,current.p.x(),1);
+
+        if (current.lb != null) {
+            drawLeftChild(current);
+        }
+        if (current.rt != null) {
+            drawRightChild(current);
+        }
     }
 
     private void drawLeftChild(Node root) {
         Node leftChild = root.lb;
+        StdDraw.setPenRadius(.02);
+        StdDraw.setPenColor(StdDraw.BLACK);
         StdDraw.point(leftChild.p.x(),leftChild.p.y());
-        StdDraw.line(0,leftChild.p.y(),root.p.x(),leftChild.p.y());
-    }
-
-    private void drawRightChild(Node root) {
-
+        if (leftChild.orientation == HORIZONTAL) {
+            StdDraw.setPenColor(StdDraw.BLUE);
+            StdDraw.setPenRadius(.01);
+            StdDraw.line(root.rect.xmin(),leftChild.p.y(),root.p.x(),leftChild.p.y());
+        } else {
+            StdDraw.setPenColor(StdDraw.RED);
+            StdDraw.setPenRadius(.01);
+            StdDraw.line(leftChild.p.x(),root.rect.ymin(),leftChild.p.x(),root.p.y());
+        }
+        if (leftChild.lb != null) {
+            drawLeftChild(leftChild);
+        }
+        if (leftChild.rt != null) {
+            drawRightChild(leftChild);
+        }
     }
 
     // all points in the tree that are inside the rectangle
@@ -104,32 +179,37 @@ public class KdTree {
 //
 //    }
 
+    private void drawRightChild(Node root) {
+        Node rightChild = root.rt;
+        StdDraw.setPenColor(StdDraw.BLACK);
+        StdDraw.setPenRadius(.02);
+        StdDraw.point(rightChild.p.x(),rightChild.p.y());
+        if (rightChild.orientation == HORIZONTAL) {
+            StdDraw.setPenColor(StdDraw.BLUE);
+            StdDraw.setPenRadius(.01);
+            StdDraw.line(rightChild.rect.xmin(),rightChild.p.y(),rightChild.rect.xmax(),rightChild.p.y());
+        } else {
+            StdDraw.setPenColor(StdDraw.RED);
+            StdDraw.setPenRadius(.01);
+            StdDraw.line(rightChild.p.x(),rightChild.rect.ymin(),rightChild.p.x(),rightChild.rect.ymax());
+        }
+        if (rightChild.lb != null) {
+            drawLeftChild(rightChild);
+        }
+        if (rightChild.rt != null) {
+            drawRightChild(rightChild);
+        }
+    }
+
     private static class Node {
         private Point2D p;      // the point
         private RectHV rect;    // the axis-aligned rectangle corresponding to this node
         private Node lb;        // the left/bottom subtree
         private Node rt;        // the right/top subtree
+        private int orientation;
 
         public Node(Point2D p) {
             this.p = p;
         }
-    }
-
-    public static void main(String[] args) {
-        String filename = args[0];
-        In in = new In(filename);
-
-        // initialize the two data structures with point from standard input
-        KdTree kdtree = new KdTree();
-        while (!in.isEmpty()) {
-            double x = in.readDouble();
-            double y = in.readDouble();
-            Point2D p = new Point2D(x, y);
-            kdtree.insert(p);
-        }
-
-        System.out.println(kdtree.contains(new Point2D(0.024472,0.345492)));
-        System.out.println(kdtree.contains(new Point2D(0.024472,0.654508)));
-        System.out.println(kdtree.contains(new Point2D(0.500000,1.000000)));
     }
 }

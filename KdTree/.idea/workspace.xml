@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6821ff68-953c-4b61-9598-072edad46328" name="Default" comment="Base logic for brute implemented.&#10;KdTree partly implemented">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../8Puzzle/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../8Puzzle/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KdTree.java" afterPath="$PROJECT_DIR$/src/KdTree.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KdTreeVisualizer.java" afterPath="$PROJECT_DIR$/src/KdTreeVisualizer.java" />
     </list>
     <ignored path="KdTree.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -10,7 +11,7 @@
     <ignored mask="*.iml" />
     <file path="/Dummy.txt" changelist="6821ff68-953c-4b61-9598-072edad46328" time="1362952242472" ignored="false" />
     <file path="/PointSET.java" changelist="6821ff68-953c-4b61-9598-072edad46328" time="1362911814417" ignored="false" />
-    <file path="/KdTree.java" changelist="6821ff68-953c-4b61-9598-072edad46328" time="1362951367567" ignored="false" />
+    <file path="/KdTree.java" changelist="6821ff68-953c-4b61-9598-072edad46328" time="1363038510583" ignored="false" />
     <file path="/fragment.java" changelist="6821ff68-953c-4b61-9598-072edad46328" time="1362950786062" ignored="false" />
     <file path="/NearestNeighborVisualizer.java" changelist="6821ff68-953c-4b61-9598-072edad46328" time="1362942098711" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -74,7 +75,7 @@
       <file leaf-file-name="RectHV.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/RectHV.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="34" selection-start="1440" selection-end="1440" vertical-scroll-proportion="0.0">
+            <state line="39" column="0" selection-start="1440" selection-end="1440" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -83,7 +84,7 @@
       <file leaf-file-name="KdTreeVisualizer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/KdTreeVisualizer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="26" selection-start="516" selection-end="516" vertical-scroll-proportion="0.0">
+            <state line="6" column="0" selection-start="164" selection-end="164" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -92,7 +93,7 @@
       <file leaf-file-name="RangeSearchVisualizer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/RangeSearchVisualizer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="95" column="31" selection-start="3102" selection-end="3291" vertical-scroll-proportion="0.0">
+            <state line="90" column="29" selection-start="3117" selection-end="3117" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -122,10 +123,10 @@
       <file leaf-file-name="KdTree.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/KdTree.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="111" column="21" selection-start="2980" selection-end="2980" vertical-scroll-proportion="0.8427481">
+            <state line="38" column="0" selection-start="949" selection-end="949" vertical-scroll-proportion="0.4878049">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#274#280#0" expanded="true" />
+                <element signature="e#369#375#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -166,18 +167,17 @@
       <list>
         <option value="$PROJECT_DIR$/src/RectHV.java" />
         <option value="$PROJECT_DIR$/src/PointSET.java" />
-        <option value="$PROJECT_DIR$/src/RangeSearchVisualizer.java" />
-        <option value="$PROJECT_DIR$/src/KdTreeVisualizer.java" />
         <option value="$PROJECT_DIR$/src/NearestNeighborVisualizer.java" />
+        <option value="$PROJECT_DIR$/src/KdTreeVisualizer.java" />
+        <option value="$PROJECT_DIR$/src/RangeSearchVisualizer.java" />
         <option value="$PROJECT_DIR$/src/KdTree.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="10" />
     <option name="y" value="22" />
-    <option name="width" value="1085" />
-    <option name="height" value="1173" />
+    <option name="width" value="1280" />
+    <option name="height" value="774" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -187,7 +187,43 @@
             <id />
           </State>
           <State>
-            <id>Error handling</id>
+            <id>Code style issues</id>
+          </State>
+          <State>
+            <id>GeneralJavaScript</id>
+          </State>
+          <State>
+            <id>Groovy</id>
+          </State>
+          <State>
+            <id>J2ME issues</id>
+          </State>
+          <State>
+            <id>JUnit issues</id>
+          </State>
+          <State>
+            <id>JavaScript</id>
+          </State>
+          <State>
+            <id>JavaScript function metricsJavaScript</id>
+          </State>
+          <State>
+            <id>Memory issues</id>
+          </State>
+          <State>
+            <id>Naming ConventionsGroovy</id>
+          </State>
+          <State>
+            <id>Naming conventions</id>
+          </State>
+          <State>
+            <id>Naming conventionsJavaScript</id>
+          </State>
+          <State>
+            <id>Performance issues</id>
+          </State>
+          <State>
+            <id>Probable bugs</id>
           </State>
         </expanded-state>
         <selected-state>
@@ -307,6 +343,29 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.KdTree">
+    <configuration default="false" name="KdTreeVisualizer" type="Application" factoryName="Application" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="KdTreeVisualizer" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="KdTree" />
+      <envs />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
@@ -461,11 +520,17 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <list size="3">
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="Application.RangeSearchVisualizer" />
       <item index="1" class="java.lang.String" itemvalue="Application.NearestNeighborVisualizer" />
       <item index="2" class="java.lang.String" itemvalue="Application.KdTree" />
+      <item index="3" class="java.lang.String" itemvalue="Application.KdTreeVisualizer" />
     </list>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Application.KdTreeVisualizer" />
+      </list>
+    </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
       <Port>5050</Port>
@@ -491,25 +556,25 @@
     <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
   </component>
   <component name="ToolWindowManager">
-    <frame x="10" y="22" width="1085" height="1173" extended-state="0" />
-    <editor active="false" />
+    <frame x="0" y="22" width="1280" height="774" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953465" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3988604" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3975535" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296875" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32953465" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2675841" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32944608" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29162657" sideWeight="0.67046535" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32193732" sideWeight="0.9980806" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24554294" sideWeight="0.67737" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32262996" sideWeight="0.98298216" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="true" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.3294893" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" x="110" y="122" width="1060" height="560" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -581,7 +646,7 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/RectHV.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="34" selection-start="1440" selection-end="1440" vertical-scroll-proportion="0.0">
+        <state line="39" column="0" selection-start="1440" selection-end="1440" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -589,20 +654,6 @@
     <entry file="jar://$USER_HOME$/Downloads/algs4.jar!/Point2D.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="105" column="25" selection-start="3641" selection-end="3641" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/RangeSearchVisualizer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="95" column="31" selection-start="3102" selection-end="3291" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/KdTreeVisualizer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="26" selection-start="516" selection-end="516" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -638,13 +689,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/NearestNeighborVisualizer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="46" selection-start="1413" selection-end="1413" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/kdtree/circle10.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="0" selection-start="162" selection-end="179" vertical-scroll-proportion="0.0">
@@ -652,12 +696,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/KdTreeVisualizer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="0" selection-start="164" selection-end="164" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RangeSearchVisualizer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="90" column="29" selection-start="3117" selection-end="3117" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NearestNeighborVisualizer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="46" selection-start="1413" selection-end="1413" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/KdTree.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="111" column="21" selection-start="2980" selection-end="2980" vertical-scroll-proportion="0.8427481">
+        <state line="38" column="0" selection-start="949" selection-end="949" vertical-scroll-proportion="0.4878049">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#274#280#0" expanded="true" />
+            <element signature="e#369#375#0" expanded="true" />
           </folding>
         </state>
       </provider>
