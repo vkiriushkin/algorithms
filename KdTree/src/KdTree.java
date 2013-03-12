@@ -18,7 +18,7 @@ public class KdTree {
     private Node root;
     private Node tempParent;
     private int levelIndex;
-
+    private Set<Point2D> pointsInRange;
     // construct an empty kd-tree
     public KdTree() {
 
@@ -170,9 +170,29 @@ public class KdTree {
     }
 
     // all points in the tree that are inside the rectangle
-//    public Iterable<Point2D> range(RectHV rect) {
-//
-//    }
+    public Iterable<Point2D> range(RectHV rect) {
+        pointsInRange = new TreeSet<Point2D>();
+        if (rect.contains(root.p))
+            pointsInRange.add(root.p);
+        childInRange(root,rect);
+        return pointsInRange;
+    }
+
+    private void childInRange(Node root, RectHV rect) {
+        if (root.rt != null && root.rt.rect.intersects(rect)) {
+            if (rect.contains(root.rt.p)) {
+                pointsInRange.add(root.rt.p);
+            }
+            childInRange(root.rt, rect);
+        }
+        if (root.lb != null && root.lb.rect.intersects(rect)) {
+            if (rect.contains(root.lb.p)) {
+                pointsInRange.add(root.lb.p);
+            }
+            childInRange(root.lb, rect);
+        }
+    }
+
 //
 //    // a nearest neighbor in the tree to p; null if tree is empty
 //    public Point2D nearest(Point2D p) {
