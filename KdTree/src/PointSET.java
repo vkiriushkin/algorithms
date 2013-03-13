@@ -14,7 +14,7 @@ public class PointSET {
 
     // construct an empty set of points
     public PointSET() {
-        setOfPoints = new TreeSet<Point2D>(Point2D.R_ORDER);
+        setOfPoints = new TreeSet<Point2D>();
     }
 
     // is the set empty?
@@ -72,6 +72,25 @@ public class PointSET {
 
         return nearest;
     }
+
+//    public static void main(String[] args) {
+//        String filename = args[0];
+//        In in = new In(filename);
+//
+//
+//        // initialize the two data structures with point from standard input
+//        PointSET brute = new PointSET();
+//        for (int i=0; i<100000; i++) {
+//            brute.insert(new Point2D(StdRandom.random(),StdRandom.random()));
+//        }
+//        while (!in.isEmpty()) {
+//            double x = in.readDouble();
+//            double y = in.readDouble();
+//            Point2D p = new Point2D(x, y);
+//            brute.insert(p);
+//        }
+//        System.out.println(brute.size());
+//    }
 
 
 

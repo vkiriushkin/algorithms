@@ -14,11 +14,14 @@ public class KdTree {
     private final int VERTICAL = 1;
     private final  int HORIZONTAL = 0;
 
-    private Set<Node> setOfNodes = new TreeSet<Node>();
+    private Set<Point2D> setOfNodes = new TreeSet<Point2D>();
     private Node root;
     private Node tempParent;
     private int levelIndex;
     private Set<Point2D> pointsInRange;
+    private Point2D currentChamp;
+    private double shortestDistance;
+
     // construct an empty kd-tree
     public KdTree() {
 
@@ -36,8 +39,12 @@ public class KdTree {
             Point2D p = new Point2D(x, y);
             kdtree.insert(p);
         }
-
-        kdtree.draw();
+        System.out.println(kdtree.size());
+//        kdtree.draw();
+//        StdDraw.setPenRadius(.02);
+//        StdDraw.setPenColor(StdDraw.GREEN);
+//        StdDraw.point(0.8544921875,0.6783203125);
+//        System.out.println(kdtree.nearest(new Point2D(0.8544921875,0.6783203125)));
     }
 
     // is the tree empty?
@@ -83,6 +90,7 @@ public class KdTree {
                 }
 
             }
+            setOfNodes.add(rootNode.p);
             return rootNode;
         }
         if (levelIndex % 2 == 0) {
@@ -193,11 +201,43 @@ public class KdTree {
         }
     }
 
-//
-//    // a nearest neighbor in the tree to p; null if tree is empty
-//    public Point2D nearest(Point2D p) {
-//
-//    }
+
+    // a nearest neighbor in the tree to p; null if tree is empty
+    public Point2D nearest(Point2D p) {
+        if (setOfNodes.isEmpty()) {
+            return null;
+        }
+
+        currentChamp = root.p;
+        shortestDistance = p.distanceTo(currentChamp);
+        if (root.lb.rect.contains(p)) {
+            inspectChildren(p,root.lb);
+        } else {
+            inspectChildren(p,root.rt);
+        }
+
+        return currentChamp;
+    }
+
+    private void inspectChildren(Point2D queryPoint, Node nodeToInspect) {
+        if (queryPoint.distanceTo(nodeToInspect.p) < shortestDistance) {
+            currentChamp = nodeToInspect.p;
+            shortestDistance = queryPoint.distanceTo(nodeToInspect.p);
+        }
+        if (nodeToInspect.lb != null || nodeToInspect.rt != null) {
+            if (nodeToInspect.lb != null) {
+                if (nodeToInspect.lb.rect.contains(queryPoint)) {
+                    inspectChildren(queryPoint,nodeToInspect.lb);
+                } else {
+                    if (nodeToInspect.rt != null) {
+                        inspectChildren(queryPoint,nodeToInspect.rt);
+                    }
+                }
+            } else {
+                inspectChildren(queryPoint,nodeToInspect.rt);
+            }
+        }
+    }
 
     private void drawRightChild(Node root) {
         Node rightChild = root.rt;
@@ -221,7 +261,7 @@ public class KdTree {
         }
     }
 
-    private static class Node {
+    private static class Node{
         private Point2D p;      // the point
         private RectHV rect;    // the axis-aligned rectangle corresponding to this node
         private Node lb;        // the left/bottom subtree
